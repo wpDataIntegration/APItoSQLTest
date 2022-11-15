@@ -149,7 +149,6 @@ def query_api():
     try:
         authToken = os.environ['auth_token']
         baseURL = os.environ['BaseUrl']
-        project = os.environ['project']
         noOfEntities = int(os.environ['maxNoOfEntries'])
     except KeyError as e:
         print("Key error occured when trying to retreive environment variables")
@@ -232,7 +231,6 @@ def query_api():
                 results = get_request(href, header)
 
                 payload.append(results)
-
 
         else:
 
