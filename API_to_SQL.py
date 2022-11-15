@@ -1,9 +1,8 @@
 """
 - sample API-request for performance measuring
 - write response into a Postgres-Database
-- makes use of Multithreading to enhance performance
-- gets areaUnits from ws/valuations/{id}?expand=areaUnitList
-- use maxNoOfEntities to define max number of entities to be retreived
+- gets rental contracts from ws/property-units/{pu.id}/ivm-rental-contracts/{id}
+- use maxNoOfEntities to define max number of propertyUnits to retreive data from
 """
 
 import psycopg2
