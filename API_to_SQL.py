@@ -186,8 +186,8 @@ def query_api():
     propertyUnits = []
 
     #Get all property units per page
-    for i in range(1):
-    #for i in range(nPages):
+    #for i in range(1):
+    for i in range(nPages):
 
         URL = baseURL + '/index/property-units?size=100&page=' + str(i)
 
@@ -225,19 +225,19 @@ def query_api():
             #get all data from all rental contracts
             for index, rc in enumerate(rentalContracts):
 
-                if index < 1:
 
-                    href = rc.get('links',{})[0].get('href',{})
 
-                    print('Get Rental Contract on : {}'.format(href))
+                href = rc.get('links',{})[0].get('href',{})
 
-                    results = get_request(href, header)
+                print('Get Rental Contract on : {}'.format(href))
 
-                    payload.append(results)
+                results = get_request(href, header)
 
-                else:
+                payload.append(results)
 
-                    break
+
+
+
 
         else:
             break
