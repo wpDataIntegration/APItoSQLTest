@@ -227,8 +227,6 @@ def query_api():
 
                 print('Get Rental Contract on : {}'.format(href))
 
-                results = None
-
                 results = get_request(href, header)
 
                 if results:
