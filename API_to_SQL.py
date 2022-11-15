@@ -157,7 +157,7 @@ def query_api():
     header = {'Authorization': 'Bearer ' + authToken}
 
     # check Validity of environment variables
-    # should be at least one and is capped to 500
+    # should be at least one and is capped to 10
     assert noOfEntities in range(1, 11), "Number of entities out of range (1-10)"
 
     # the combination of BaseURL + authToken should give a valid webservice response (status code 200)
