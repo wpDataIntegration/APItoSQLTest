@@ -243,13 +243,19 @@ def query_api():
 
             break
 
-    # Inject Jsons to SQL
-    insert_sql(payload)
+    if len(payload)>0:
 
-    end_time = time.time()
-    time_elapsed = (end_time - start_time)
-    print('Total Runtime API-Call: {} seconds'.format(round(time_elapsed)))
-    return payload
+        # Inject Jsons to SQL
+        insert_sql(payload)
+
+        end_time = time.time()
+        time_elapsed = (end_time - start_time)
+        print('Total Runtime API-Call: {} seconds'.format(round(time_elapsed)))
+        return payload
+
+    else:
+
+        print('No data could be gathered from the API-requests')
 
 if __name__ == '__main__':
     query_api()
