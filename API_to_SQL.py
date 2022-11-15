@@ -229,7 +229,13 @@ def query_api():
 
                 results = get_request(href, header)
 
-                payload.append(results)
+                if results:
+
+                    payload.append(results)
+
+                else:
+
+                    print('No data on : {}'.format(href))
 
         else:
 
