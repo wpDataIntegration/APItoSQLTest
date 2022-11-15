@@ -5,6 +5,7 @@
 - gets areaUnits from ws/valuations/{id}?expand=areaUnitList
 - use maxNoOfEntities to define max number of entities to be retreived
 """
+
 import psycopg2
 from psycopg2.extras import Json
 from configparser import ConfigParser
@@ -12,10 +13,10 @@ import os
 import requests
 import time
 from datetime import datetime
-import re
 from dotenv import load_dotenv
 import json
 
+#gets the enviromment variables from .env-file, if there is one
 load_dotenv()
 
 
@@ -59,8 +60,7 @@ def insert_json(dict_id, dict_obj, modDate):
               EXCLUDED.mod_date > old.mod_date
              RETURNING json_id;"""
 
-
-
+    #should not be used, column names not correct
     # sql_query = """DROP TABLE IF EXISTS public.Mietobjekte;
     #             SELECT
     #                 json_col ->> 'id' as BewId,
@@ -79,7 +79,6 @@ def insert_json(dict_id, dict_obj, modDate):
     #                 public.Mietobjekte
     #             FROM
     #                 public.json_ruby;"""
-
 
 
     conn = None
@@ -112,11 +111,11 @@ def insert_json(dict_id, dict_obj, modDate):
 
 def insert_sql(payload):
     for dict_index, dict_content in enumerate(payload):
+
         #tmstp_dict_content = datetime.strptime(dict_content['modificationDate'], '%Y-%m-%dT%H:%M:%S.%f')
 
         #dummy timestamp, da auf /ivm-rental-contracts kein modificationDate existiert
-        tmstp_dict_content = datetime.strptime('2022-11-15T14:56:21', '%Y-%m-%dT%H:%M:%S')
-
+        tmstp_dict_content = datetime.now()
 
         dict_key = dict_content['id']
         insert_json(dict_key, dict_content, tmstp_dict_content)
@@ -226,7 +225,6 @@ def query_api():
             for index, rc in enumerate(rentalContracts):
 
 
-
                 href = rc.get('links',{})[0].get('href',{})
 
                 print('Get Rental Contract on : {}'.format(href))
@@ -236,12 +234,9 @@ def query_api():
                 payload.append(results)
 
 
-
-
-
         else:
-            break
 
+            break
 
     # Inject Jsons to SQL
     insert_sql(payload)
@@ -250,7 +245,6 @@ def query_api():
     time_elapsed = (end_time - start_time)
     print('Total Runtime API-Call: {} seconds'.format(round(time_elapsed)))
     return payload
-
 
 if __name__ == '__main__':
     query_api()
